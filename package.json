@@ -1,0 +1,16 @@
+{
+  "name": "devrant-discord-bot",
+  "version": "0.0.1",
+  "description": "Bot for discord that uses devRant API",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Szymon 'szymex73' Borecki <szymex73@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "co": "^4.6.0",
+    "devrant": "0.0.5",
+    "discord.io": "^2.4.2"
+  }
+}
