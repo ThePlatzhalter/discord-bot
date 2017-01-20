@@ -1,0 +1,16 @@
+{
+  "name": "discord-bot",
+  "scripts": {
+    "postdeploy": "npm install"
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}
