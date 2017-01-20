@@ -4,7 +4,8 @@
   "description": "Bot for discord that uses devRant API",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bot.js"
   },
   "author": "Szymon 'szymex73' Borecki <szymex73@gmail.com>",
   "license": "MIT",
