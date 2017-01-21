@@ -7,19 +7,6 @@ let bot       = new Discord.Client({
 	autorun: true
 })
 
-let helpMsg = `devRantDiscord made by szymex73
-\`\`\`List of commands:
- - help » displays this message
- - post (id) » fetches rant and displays it
- - profile (username) » fetches profile and displays basic info about the user
-	
-				 
-Notice that API calls can take some time to finish
-You can invite the bot using this link:
-https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0
-Or test it on szymex73's server (invite code: FDBQKMY)
-\`\`\``
-
 function getProfile(username) {
   return co(function *fetchProfile() {    
     const profile = yield devRant.profile(username);
@@ -40,7 +27,18 @@ bot.on('message', (user, userID, channelID, message, event) => {
 			if(msg.startsWith("help")) {
 				bot.sendMessage({
 					to: channelID,
-					message: helpMsg
+					message: `devRantDiscord made by szymex73
+					\`\`\`List of commands:
+					 - help » displays this message
+					 - post (id) » fetches rant and displays it
+					 - profile (username) » fetches profile and displays basic info about the user
+
+
+					Notice that API calls can take some time to finish
+					You can invite the bot using this link:
+					https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0
+					Or test it on szymex73's server (invite code: FDBQKMY)
+					\`\`\``
 				}, (err, res) => {
 					if (err) { console.error(err) }
 				})
