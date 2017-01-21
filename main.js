@@ -1,13 +1,24 @@
-// https://discordapp.com/oauth2/authorize?client_id=272131727697117204&scope=bot&permissions=0
-
 const Discord = require('discord.io')
 const devRant = require('devrant')
 const co      = require('co')
+const config  = require('./opts')
 let bot       = new Discord.Client({
-//	token: "MjA0MjgwNTU4MDE5MjgwODk2.Cm1KmA.ex1NrNT7AOQZtWaxUouO5Zj4xQU",
-	token: "MjcyMTMxNzI3Njk3MTE3MjA0.C2Qh8g.x8j1akbIncikfZKwG45chti47rs",
+	token: config.token,
 	autorun: true
 })
+
+let helpMsg = `devRantDiscord made by szymex73
+\`\`\`List of commands:
+ - help » displays this message
+ - post (id) » fetches rant and displays it
+ - profile (username) » fetches profile and displays basic info about the user
+	
+				 
+Notice that API calls can take some time to finish
+You can invite the bot using this link:
+https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0
+Or test it on szymex73's server (invite code: FDBQKMY)
+\`\`\``
 
 function getProfile(username) {
   return co(function *fetchProfile() {    
@@ -22,39 +33,33 @@ bot.on('ready', () => {
 })
 
 bot.on('message', (user, userID, channelID, message, event) => {
-	console.log(userID)
-	if(userID != "272114975504465920") {
+	if(userID != bot.id) {
 		if(message.startsWith("dR ")) {
-			console.log("catched msg")
 			let msg = message.substring(3)
 
 
 			if(msg.startsWith("help")) {
 				bot.sendMessage({
 					to: channelID,
-					message: `${bot.username} made by szymex73\n` + "```List of commands:\n - help » displays this message\n - post (id) » fetches rant and displays it\n - profile (username) » fetches profile and displays basic info about the user\n\n\nNotice that API calls can take some time to finish\nYou can invite the bot using this link:\nhttps://discordapp.com/oauth2/authorize?client_id=272131727697117204&scope=bot&permissions=0\nOr test it on szymex73's server (invite code: FDBQKMY)```"
+					message: helpMsg
 				}, (err, res) => {
 					if (err) { console.error(err) }
 				})
 			} else if(msg.startsWith("post")) {
 				let id     = msg.substring(5)
-				console.log(id)
 				let isID = /^[0-9]+$/.test(id)
-				console.log(isID)
 				if(isID) {
 					devRant
 						.rant(parseInt(id))
 						.then((rant) => {
 							let res = rant
 							if(res.success == true) {
-								console.log(res)
 								bot.sendMessage({
 									to: channelID,
 									message: `Here is content of rant no. \`${parseInt(id)}\`\nAuthor: \`${res.rant.user_username}\`\n\`\`\`${res.rant.text}\`\`\``
 								}, (err, res) => {
 									if (err) { console.error(err) }
 								})
-								console.log("sent rant")
 							}
 						})
 						.catch(function (err) {
