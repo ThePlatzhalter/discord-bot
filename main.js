@@ -15,16 +15,19 @@ function getProfile(username) {
 }
 
 bot.on('ready', () => {
-	console.log(bot.username, "- (", bot.id, ")")
+	console.log(`devRantBot Initialized!`)
 })
 
 bot.on('message', (user, userID, channelID, message, event) => {
+
 	if(userID != bot.id) {
+
 		if(message.startsWith("dR ")) {
+
 			let msg = message.substring(3)
 
-
 			if(msg.startsWith("help")) {
+
 				bot.sendMessage({
 					to: channelID,
 					message: `devRantDiscord made by szymex73
@@ -40,37 +43,56 @@ bot.on('message', (user, userID, channelID, message, event) => {
 					Or test it on szymex73's server (invite code: FDBQKMY)
 					\`\`\``
 				}, (err, res) => {
+
 					if (err) { console.error(err) }
+
 				})
+
 			} else if(msg.startsWith("post")) {
+
 				let id     = msg.substring(5)
 				let isID = /^[0-9]+$/.test(id)
+
 				if(isID) {
+
 					devRant
 						.rant(parseInt(id))
 						.then((rant) => {
 							let res = rant
 							if(res.success == true) {
+
 								bot.sendMessage({
 									to: channelID,
 									message: `Here is content of rant no. \`${parseInt(id)}\`
 									Author: \`${res.rant.user_username}\`
 									\`\`\`${res.rant.text}\`\`\``
 								}, (err, res) => {
+
 									if (err) { console.error(err) }
+
 								})
+
 							}
+
 						})
 						.catch(function (err) {
+
      					console.log("Promise Rejected", err);
+
 						});
+
 				}
+
 			} else if(msg.startsWith("profile")) {
+
 				let username = msg.substring(8)
 				let profile = {}
+
 				getProfile(username)
 					.then((res) => {
+
 						profile = res
+
 						bot.sendMessage({
 							to: channelID,
 							message: `User \`${profile.username}\`
@@ -79,11 +101,16 @@ bot.on('message', (user, userID, channelID, message, event) => {
 							Skills: \`${profile.skills}\`
 							No. of rants: \`${profile.content.counts.rants}\``
 						})
+
 					})
 					.catch(function (err) {
+
      				console.log("Promise Rejected", err);
 					});
+
 			}
 		}
+
 	}
+	
 })
