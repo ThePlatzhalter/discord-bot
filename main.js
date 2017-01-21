@@ -23,7 +23,6 @@ Or test it on szymex73's server (invite code: FDBQKMY)
 function getProfile(username) {
   return co(function *fetchProfile() {    
     const profile = yield devRant.profile(username);
-
     return profile
   });
 }
@@ -56,7 +55,9 @@ bot.on('message', (user, userID, channelID, message, event) => {
 							if(res.success == true) {
 								bot.sendMessage({
 									to: channelID,
-									message: `Here is content of rant no. \`${parseInt(id)}\`\nAuthor: \`${res.rant.user_username}\`\n\`\`\`${res.rant.text}\`\`\``
+									message: `Here is content of rant no. \`${parseInt(id)}\`
+									Author: \`${res.rant.user_username}\`
+									\`\`\`${res.rant.text}\`\`\``
 								}, (err, res) => {
 									if (err) { console.error(err) }
 								})
@@ -74,7 +75,11 @@ bot.on('message', (user, userID, channelID, message, event) => {
 						profile = res
 						bot.sendMessage({
 							to: channelID,
-							message: `User \`${profile.username}\`\nScore: \`${profile.score}\`\nAbout: \`${profile.about}\`\nSkills: \`${profile.skills}\`\nNo. of rants: \`${profile.content.counts.rants}\``
+							message: `User \`${profile.username}\`
+							Score: \`${profile.score}\`
+							About: \`${profile.about}\`
+							Skills: \`${profile.skills}\`
+							No. of rants: \`${profile.content.counts.rants}\``
 						})
 					})
 					.catch(function (err) {
