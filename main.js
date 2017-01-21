@@ -34,7 +34,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
 					\`\`\`List of commands:
  - help » displays this message
  - rant (id) » fetches rant and displays it
- - profile (username) » fetches profile and displays basic info about the user
+ - profile/user (username) » fetches profile and displays basic info about the user
  - recent » fetches the most recent rant and displays it
 
 
@@ -84,7 +84,7 @@ Author: \`${res.rant.user_username}\`
 
 				}
 
-			} else if(msg.startsWith("profile")) {
+			} else if(msg.startsWith("profile") || msg.startsWith("user")) {
 
 				let username = msg.substring(8)
 				let profile = {}
