@@ -33,7 +33,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
 					message: `devRantDiscord made by szymex73
 					\`\`\`List of commands:
  - help » displays this message
- - rant (id) » fetches rant and displays it
+ - rant (id) » fetches rant by id and displays it
  - profile/user (username) » fetches profile and displays basic info about the user
  - recent » fetches the most recent rant and displays it
 
