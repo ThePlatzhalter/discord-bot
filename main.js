@@ -42,7 +42,7 @@ Notice that API calls can take some time to finish
 You can invite the bot using this link:
 https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0
 Or test it on szymex73's server (invite code: FDBQKMY)
-Thanks for using devRantDiscord!
+Thanks for using devRantDiscord! :)
 \`\`\``
 				}, (err, res) => {
 
