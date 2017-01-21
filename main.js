@@ -8,10 +8,10 @@ let bot       = new Discord.Client({
 })
 
 function getProfile(username) {
-  return co(function *fetchProfile() {    
-    const profile = yield devRant.profile(username);
-    return profile
-  });
+	return co(function *fetchProfile() {    
+		const profile = yield devRant.profile(username);
+		return profile
+	});
 }
 
 bot.on('ready', () => {
@@ -77,7 +77,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
 						})
 						.catch(function (err) {
 
-     					console.log("Promise Rejected", err);
+							console.log("Promise Rejected", err);
 
 						});
 
@@ -105,12 +105,52 @@ bot.on('message', (user, userID, channelID, message, event) => {
 					})
 					.catch(function (err) {
 
-     				console.log("Promise Rejected", err);
+						console.log("Promise Rejected", err);
 					});
 
+			} else if(msg.startsWith("recent")) {
+				let rantArray = []
+
+				devRant
+					.rants({
+						sort: 'recent',
+						limit: 5
+					})
+					.then((rants) => {
+						rantArray = rants
+
+						bot.sendMessage({
+							to: channelID,
+							message: `5 recent rants from devRant:
+							**1.** Id: \`${rantArray[0].id}\`
+							Author: \`${rantArray[0].user_username}\`
+							Score: \`${rantArray[0].score}\`
+							Text: \`${rantArray[0].text}\`
+							**2.** Id: \`${rantArray[1].id}\`
+							Author: \`${rantArray[1].user_username}\`
+							Score: \`${rantArray[1].score}\`
+							Text: \`${rantArray[1].text}\`
+							**3.** Id: \`${rantArray[2].id}\`
+							Author: \`${rantArray[2].user_username}\`
+							Score: \`${rantArray[2].score}\`
+							Text: \`${rantArray[2].text}\`
+							**4.** Id: \`${rantArray[3].id}\`
+							Author: \`${rantArray[3].user_username}\`
+							Score: \`${rantArray[3].score}\`
+							Text: \`${rantArray[3].text}\`
+							**5.** Id: \`${rantArray[4].id}\`
+							Author: \`${rantArray[4].user_username}\`
+							Score: \`${rantArray[4].score}\`
+							Text: \`${rantArray[4].text}\`
+							`
+						})
+					})
+					.catch((err) => {
+						console.log('err: ', err.message);
+					});
 			}
 		}
 
 	}
-	
+
 })
