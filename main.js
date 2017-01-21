@@ -7,9 +7,9 @@ let bot       = new Discord.Client({
 	autorun: true
 })
 
-function getProfile(username) {
+function getProfile(user) {
 	return co(function *fetchProfile() {    
-		const profile = yield devRant.profile(username);
+		const profile = yield devRant.profile(user);
 		return profile
 	});
 }
