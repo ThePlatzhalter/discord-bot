@@ -79,6 +79,11 @@ Author: \`${res.rant.user_username}\`
 						.catch(function (err) {
 
 							console.log("Promise Rejected", err);
+							bot.sendMessage({
+								to: channelID,
+								message: "Error: Rant not found. Check command if there are typos. Contact with szymex73 if error repeats."
+							})
+
 
 						});
 
@@ -86,7 +91,15 @@ Author: \`${res.rant.user_username}\`
 
 			} else if(msg.startsWith("profile") || msg.startsWith("user")) {
 
-				let username = msg.substring(8)
+				let substringNum
+
+				if(msg.startsWith("profile")) {
+					substringNum = 8
+				} else if(msg.startsWith("user")) {
+					substringNum = 5
+				}
+
+				let username = msg.substring(substringNum)
 				let profile = {}
 
 				getProfile(username)
@@ -107,6 +120,12 @@ No. of rants: \`${profile.content.counts.rants}\``
 					.catch(function (err) {
 
 						console.log("Promise Rejected", err);
+
+						bot.sendMessage({
+							to: channelID,
+							message: "Error: User not found. Check command if there are typos. Contact with szymex73 if error repeats."
+						})
+
 					});
 
 			} else if(msg.startsWith("recent")) {
@@ -130,7 +149,14 @@ Text: \`\`\`${rantArray[0].text}\`\`\``
 						})
 					})
 					.catch((err) => {
+
 						console.log('err: ', err.message);
+
+						bot.sendMessage({
+							to: channelID,
+							message: "Error: Could not fetch recent rant. Contact with szymex73 for help"
+						})
+
 					});
 			}
 		}
