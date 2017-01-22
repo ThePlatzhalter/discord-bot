@@ -30,6 +30,15 @@ bot.on('message', (user, userID, channelID, message, event) => {
 
 				bot.sendMessage({
 					to: channelID,
+					message: `<@${userID}> Check Your DM for commands`
+				}, (err, res) => {
+
+					if (err) { console.error(err) }
+
+				})
+
+				bot.sendMessage({
+					to: userID,
 					message: `devRantDiscord made by szymex73
 					\`\`\`List of commands:
  - help » displays this message
