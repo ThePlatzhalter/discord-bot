@@ -28,20 +28,11 @@ bot.on('message', (user, userID, channelID, message, event) => {
 			let msg = message.substring(3)
 
 			if(msg.startsWith("help")) {
-
-				bot.sendMessage({
-					to: channelID,
-					message: `<@${userID}> Check Your DM for commands`
-				}, (err, res) => {
-
-					if (err) { console.error(err) }
-
-				})
-
-				bot.sendMessage({
-					to: userID,
-					message: `devRantDiscord made by szymex73
-					\`\`\`List of commands:
+				if(channelID == userID) {
+					bot.sendMessage({
+						to: userID,
+						message: `devRantDiscord made by szymex73
+\`\`\`List of commands:
  - help » displays this message
  - rant (id) » fetches rant by id and displays it
  - profile/user (username) » fetches profile and displays basic info about the user
@@ -54,12 +45,43 @@ https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permission
 Or test it on szymex73's server (invite code: FDBQKMY)
 Thanks for using devRantDiscord! :)
 \`\`\``
-				}, (err, res) => {
+					}, (err, res) => {
 
-					if (err) { console.error(err) }
+						if (err) { console.error(err) }
 
-				})
+					})
+				} else {
+					bot.sendMessage({
+						to: channelID,
+						message: `<@${userID}> Check Your DM for commands`
+					}, (err, res) => {
 
+						if (err) { console.error(err) }
+
+					})
+
+					bot.sendMessage({
+						to: userID,
+						message: `devRantDiscord made by szymex73
+\`\`\`List of commands:
+ - help » displays this message
+ - rant (id) » fetches rant by id and displays it
+ - profile/user (username) » fetches profile and displays basic info about the user
+ - recent » fetches the most recent rant and displays it
+
+
+Notice that API calls can take some time to finish
+You can invite the bot using this link:
+https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0
+Or test it on szymex73's server (invite code: FDBQKMY)
+Thanks for using devRantDiscord! :)
+\`\`\``
+					}, (err, res) => {
+
+						if (err) { console.error(err) }
+
+					})
+				}
 			} else if(msg.startsWith("rant")) {
 
 				let id     = msg.substring(5)
