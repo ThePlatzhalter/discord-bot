@@ -16,6 +16,7 @@ function getProfile(user) {
 
 bot.on('ready', () => {
 	console.log(`devRantBot Initialized!`)
+	bot.setPresence({game: "type dR help"});
 })
 
 bot.on('message', (user, userID, channelID, message, event) => {
