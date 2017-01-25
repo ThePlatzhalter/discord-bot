@@ -71,18 +71,30 @@ Thanks for using devRantDiscord! :)
 						.then((rant) => {
 							let res = rant
 							if(res.success == true) {
+								if(res.rant.attached_image.url) {
+									bot.sendMessage({
+										to: channelID,
+										message: `Here is content of rant no. \`${parseInt(id)}\`
+Author: \`${res.rant.user_username}\`
+\`\`\`${res.rant.text}\`\`\`
+${res.attached_image.url}`
+									}, (err, res) => {
 
-								bot.sendMessage({
-									to: channelID,
-									message: `Here is content of rant no. \`${parseInt(id)}\`
+										if (err) { console.error(err) }
+
+									})
+								} else {
+									bot.sendMessage({
+										to: channelID,
+										message: `Here is content of rant no. \`${parseInt(id)}\`
 Author: \`${res.rant.user_username}\`
 \`\`\`${res.rant.text}\`\`\``
-								}, (err, res) => {
+									}, (err, res) => {
 
-									if (err) { console.error(err) }
+										if (err) { console.error(err) }
 
-								})
-
+									})
+								}
 							}
 
 						})
@@ -129,7 +141,8 @@ Author: \`${res.rant.user_username}\`
 Score: \`${profile.score}\`
 About: \`${about}\`
 Skills: \`${profile.skills}\`
-No. of rants: \`${profile.content.counts.rants}\``
+No. of rants: \`${profile.content.counts.rants}\`
+https://avatars.devrant.io/${profile.avatar.i}`
 						})
 
 					})
@@ -155,14 +168,28 @@ No. of rants: \`${profile.content.counts.rants}\``
 					.then((rants) => {
 						rantArray = rants
 
-						bot.sendMessage({
-							to: channelID,
-							message: `Most recent rant from devRant:
+						if(rantArray[0].attached_image.url) {
+							bot.sendMessage({
+								to: channelID,
+								message: `Most recent rant from devRant:
+Rant id: \`${rantArray[0].id}\`
+Author: \`${rantArray[0].user_username}\`
+Score: \`${rantArray[0].score}\`
+Text: \`\`\`${rantArray[0].text}\`\`\`
+${rantArray[0].attached_image.url}`
+							})
+						
+						} else {
+
+							bot.sendMessage({
+								to: channelID,
+								message: `Most recent rant from devRant:
 Rant id: \`${rantArray[0].id}\`
 Author: \`${rantArray[0].user_username}\`
 Score: \`${rantArray[0].score}\`
 Text: \`\`\`${rantArray[0].text}\`\`\``
-						})
+							})
+						}
 					})
 					.catch((err) => {
 
