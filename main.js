@@ -111,17 +111,23 @@ Author: \`${res.rant.user_username}\`
 
 				let username = msg.substring(substringNum)
 				let profile = {}
+				let about = ''
 
 				getProfile(username)
 					.then((res) => {
 
 						profile = res
+						if(profile.about == '') {
+							about = 'No info'
+						} else {
+							about = profile.about
+						}
 
 						bot.sendMessage({
 							to: channelID,
 							message: `User \`${profile.username}\`
 Score: \`${profile.score}\`
-About: \`${profile.about}\`
+About: \`${about}\`
 Skills: \`${profile.skills}\`
 No. of rants: \`${profile.content.counts.rants}\``
 						})
