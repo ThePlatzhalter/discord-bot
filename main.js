@@ -77,7 +77,7 @@ Thanks for using devRantDiscord! :)
 										message: `Here is content of rant no. \`${parseInt(id)}\`
 Author: \`${res.rant.user_username}\`
 \`\`\`${res.rant.text}\`\`\`
-${res.attached_image.url}`
+${res.rant.attached_image.url}`
 									}, (err, res) => {
 
 										if (err) { console.error(err) }
