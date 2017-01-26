@@ -16,6 +16,7 @@ function getProfile(user) {
 
 bot.on('ready', () => {
 	console.log(`devRantBot Initialized!`)
+	setGame('Type dR help')
 })
 
 bot.on('message', (user, userID, channelID, message, event) => {
@@ -207,3 +208,7 @@ Text: \`\`\`${rantArray[0].text}\`\`\``
 	}
 
 })
+
+function setGame(game) {
+    bot.setPresence({game: { name: game } });
+}
