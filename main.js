@@ -126,15 +126,22 @@ Author: \`${res.rant.user_username}\`
 				let username = msg.substring(substringNum)
 				let profile = {}
 				let about = ''
+				let skills = ''
 
 				getProfile(username)
 					.then((res) => {
 
 						profile = res
 						if(profile.about == '') {
-							about = 'No info'
+							about = 'No info specified'
 						} else {
 							about = profile.about
+						}
+
+						if(profile.skills == '') {
+							skills = 'No skills specified'
+						} else {
+							skills = profile.skills
 						}
 
 						bot.sendMessage({
@@ -142,7 +149,7 @@ Author: \`${res.rant.user_username}\`
 							message: `User \`${profile.username}\`
 Score: \`${profile.score}\`
 About: \`${about}\`
-Skills: \`${profile.skills}\`
+Skills: \`${skills}\`
 No. of rants: \`${profile.content.counts.rants}\`
 https://avatars.devrant.io/${profile.avatar.i}`
 						})
