@@ -2,7 +2,7 @@ const Discord = require('discord.io')
 const devRant = require('devrant')
 const co      = require('co')
 const config  = require('./opts')
-let bot       = new Discord.Client({
+const bot     = new Discord.Client({
 	token: config.token,
 	autorun: true
 })
