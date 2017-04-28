@@ -127,6 +127,7 @@ Author: \`${res.rant.user_username}\`
 				let profile = {}
 				let about = ''
 				let skills = ''
+				let avatar = ''
 
 				getProfile(username)
 					.then((res) => {
@@ -144,6 +145,12 @@ Author: \`${res.rant.user_username}\`
 							skills = profile.skills
 						}
 
+						if(typeof profile.avatar.i == 'undefined'){
+							avatar = '\`No avatar\`'
+						} else {
+							avatar = `https://avatars.devrant.io/${profile.avatar.i}`
+						}
+
 						bot.sendMessage({
 							to: channelID,
 							message: `User \`${profile.username}\`
@@ -151,7 +158,7 @@ Score: \`${profile.score}\`
 About: \`${about}\`
 Skills: \`${skills}\`
 No. of rants: \`${profile.content.counts.rants}\`
-https://avatars.devrant.io/${profile.avatar.i}`
+${avatar}`
 						})
 
 					})
