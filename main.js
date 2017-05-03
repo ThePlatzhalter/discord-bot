@@ -122,7 +122,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
 							avatar = `https://avatars.devrant.io/${profile.avatar.i}`
 						}
 
-						let message = ``User \`${profile.username}\`\n`
+						let message = `User \`${profile.username}\`\n`
 						message += `Score: \`${profile.score}\`\n`
 						message += `About: \`${about}\`\n`
 						message += `Skills: \`${skills}\`\n`
