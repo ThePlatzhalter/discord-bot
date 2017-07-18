@@ -60,13 +60,27 @@ bot.on('message', (user, userID, channelID, message, event) => {
 							let res = rant
 							if(res.success == true) {
 								if(res.rant.attached_image.url) {
-									let message = `Here is content of rant no. \`${parseInt(id)}\`\n`
-									message += `Author: \`${res.rant.user_username}\`\n`
-									message += `\`\`\`${res.rant.text}\`\`\`\n`
-									message += `${res.rant.attached_image.url}`
+									// let message = `Here is content of rant no. \`${parseInt(id)}\`\n`
+									// message += `Author: \`${res.rant.user_username}\`\n`
+									// message += `\`\`\`${res.rant.text}\`\`\`\n`
+									// message += `${res.rant.attached_image.url}`
+									let embed = {
+										description: res.rant.text,
+										url: 'https://www.devrant.io/rants/' + res.rant.parseInt(id),
+										footer: {
+											text: 'devRantDiscord'
+										},
+										image: {
+											url: res.rant.attached_image.url
+										},
+										author: {
+											name: res.rant.user_username,
+											url: 'https://www.devrant.io/users/' + res.rant.user_username
+										}
+									}
 									bot.sendMessage({
 										to: channelID,
-										message: message
+										embed: embed
 									}, (err, res) => {
 										if (err) { console.error(err) }
 									})
