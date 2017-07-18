@@ -156,7 +156,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
 							},
 							author: {
 								name: res.rant.user_username,
-								url: 'https://www.devrant.io/users/' + res.rant.user_username
+								url: 'https://www.devrant.io/users/' + profile.username
 							},
 							fields: [
 								{
