@@ -60,10 +60,6 @@ bot.on('message', (user, userID, channelID, message, event) => {
 							let res = rant
 							if(res.success == true) {
 								if(res.rant.attached_image.url) {
-									// let message = `Here is content of rant no. \`${parseInt(id)}\`\n`
-									// message += `Author: \`${res.rant.user_username}\`\n`
-									// message += `\`\`\`${res.rant.text}\`\`\`\n`
-									// message += `${res.rant.attached_image.url}`
 									let embed = {
 										description: res.rant.text,
 										url: 'https://www.devrant.io/rants/' + parseInt(id),
@@ -85,12 +81,20 @@ bot.on('message', (user, userID, channelID, message, event) => {
 										if (err) { console.error(err) }
 									})
 								} else {
-									let message = `Here is content of rant no. \`${parseInt(id)}\`\n`
-									message += `Author: \`${res.rant.user_username}\`\n`
-									message += `\`\`\`${res.rant.text}\`\`\``
+									let embed = {
+										description: res.rant.text,
+										url: 'https://www.devrant.io/rants/' + parseInt(id),
+										footer: {
+											text: 'devRantDiscord'
+										},
+										author: {
+											name: res.rant.user_username,
+											url: 'https://www.devrant.io/users/' + res.rant.user_username
+										}
+									}
 									bot.sendMessage({
 										to: channelID,
-										message: message
+										embed: embed
 									}, (err, res) => {
 										if (err) { console.error(err) }
 									})
@@ -131,7 +135,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
 							skills = profile.skills
 						}
 						if(typeof profile.avatar.i == 'undefined'){
-							avatar = '\`No avatar\`'
+							avatar = ''
 						} else {
 							avatar = `https://avatars.devrant.io/${profile.avatar.i}`
 						}
@@ -142,10 +146,40 @@ bot.on('message', (user, userID, channelID, message, event) => {
 						message += `Skills: \`${skills}\`\n`
 						message += `No. of rants: \`${profile.content.counts.rants}\`\n`
 						message += `${avatar}`
+						let embed = {
+							description: about,
+							footer: {
+								text: 'devRantDiscord'
+							},
+							image: {
+								url: avatar
+							},
+							author: {
+								name: res.rant.user_username,
+								url: 'https://www.devrant.io/users/' + res.rant.user_username
+							},
+							fields: [
+								{
+									name: 'Skills',
+									value: skills,
+									inline: true
+								},
+								{
+									name: 'Points',
+									value: profile.score,
+									inline: true
+								},
+								{
+									name: 'No. of rants',
+									value: profile.content.counts.rants,
+									inline: true
+								}
+							]
+						}
 
 						bot.sendMessage({
 							to: channelID,
-							message: message
+							embed: embed
 						})
 
 					})
