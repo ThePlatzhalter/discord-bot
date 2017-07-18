@@ -66,7 +66,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
 									// message += `${res.rant.attached_image.url}`
 									let embed = {
 										description: res.rant.text,
-										url: 'https://www.devrant.io/rants/' + res.rant.parseInt(id),
+										url: 'https://www.devrant.io/rants/' + parseInt(id),
 										footer: {
 											text: 'devRantDiscord'
 										},
