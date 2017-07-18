@@ -140,12 +140,6 @@ bot.on('message', (user, userID, channelID, message, event) => {
 							avatar = `https://avatars.devrant.io/${profile.avatar.i}`
 						}
 
-						let message = `User \`${profile.username}\`\n`
-						message += `Score: \`${profile.score}\`\n`
-						message += `About: \`${about}\`\n`
-						message += `Skills: \`${skills}\`\n`
-						message += `No. of rants: \`${profile.content.counts.rants}\`\n`
-						message += `${avatar}`
 						let embed = {
 							description: about,
 							footer: {
@@ -207,20 +201,41 @@ bot.on('message', (user, userID, channelID, message, event) => {
 							message += `Text: \`\`\`${rantArray[0].text}\`\`\`\n`
 							message += `${rantArray[0].attached_image.url}`
 
-							bot.sendMessage({
-								to: channelID,
-								message: message
-							})
-						} else {
-							let message = `Most recent rant from devRant:\n`
-							message += `Rant id: \`${rantArray[0].id}\`\n`
-							message += `Author: \`${rantArray[0].user_username}\`\n`
-							message += `Score: \`${rantArray[0].score}\`\n`
-							message += `Text: \`\`\`${rantArray[0].text}\`\`\``
+							let embed = {
+								description: rantArray[0].text,
+								url: 'https://www.devrant.io/rants/' + rantArray[0].id,
+								footer: {
+									text: 'devRantDiscord'
+								},
+								image: {
+									url: rantArray[0].attached_image.url
+								},
+								author: {
+									name: rantArray[0].user_username,
+									url: 'https://www.devrant.io/users/' + rantArray[0].user_username
+								}
+							}
 
 							bot.sendMessage({
 								to: channelID,
-								message: message
+								embed: embed
+							})
+						} else {
+							let embed = {
+								description: rantArray[0].text,
+								url: 'https://www.devrant.io/rants/' + rantArray[0].id,
+								footer: {
+									text: 'devRantDiscord'
+								},
+								author: {
+									name: rantArray[0].user_username,
+									url: 'https://www.devrant.io/users/' + rantArray[0].user_username
+								}
+							}
+
+							bot.sendMessage({
+								to: channelID,
+								embed: embed
 							})
 						}
 					})
