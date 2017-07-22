@@ -105,7 +105,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
 							console.log("Promise Rejected", err)
 							bot.sendMessage({
 								to: channelID,
-								message: "Error: Rant not found. Check command if there are typos. Contact with szymex73 if error repeats."
+								message: "Error: Rant not found. Check command if there are typos. Contact with szymex73 if the error persists."
 							})
 						})
 				}
@@ -181,7 +181,7 @@ bot.on('message', (user, userID, channelID, message, event) => {
 						console.log("Promise Rejected", err)
 						bot.sendMessage({
 							to: channelID,
-							message: "Error: User not found. Check command if there are typos. Contact with szymex73 if error repeats."
+							message: "Error: User not found. Check command if there are typos. Contact with szymex73 if the error persists."
 						})
 					})
 			} else if(msg.startsWith("recent")) {
