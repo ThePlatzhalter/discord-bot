@@ -43,6 +43,8 @@ bot.on('message', (user, userID, channelID, message, event) => {
 				helpMsg += `You can invite the bot using this link:\n`
 				helpMsg += `https://discordapp.com/oauth2/authorize?client_id=${bot.id}&scope=bot&permissions=0\n`
 				helpMsg += `Thanks for using devRantDiscord! :)\`\`\``
+				helpMsg += '\n\n\n'
+				helpMsg += '(devRantDiscord is FOSS! Contribute here: https://github.com/szymex73/discord-bot)'
 
 				bot.sendMessage({
 					to: userID,
